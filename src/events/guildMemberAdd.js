@@ -3,7 +3,7 @@ const LCD = require('../lib/structures/LCD');
 
 module.exports = class extends Event {
     async run(member) {
-        let lcd = LCD.getLCD();
+        const lcd = LCD.getLCD();
 
         lcd.clear();
         lcd.setCursor(0, 0);
@@ -14,7 +14,7 @@ module.exports = class extends Event {
         console.log(`New Member: ${member.user.username}`);
 
         setTimeout(() => {
-            LCD.displayStats(member.guild);
-        },7000)
+            LCD.refreshScreen();
+        }, 7000);
     }
 };

@@ -1,5 +1,5 @@
-const { Event } = require("klasa");
-const LCD = require("../lib/structures/LCD");
+const { Event } = require('klasa');
+const LCD = require('../lib/structures/LCD');
 
 module.exports = class extends Event {
     async run() {
@@ -7,7 +7,7 @@ module.exports = class extends Event {
         this.client.console.log(`LCD Ready...`);
 
         const guild = this.client.guilds.get(`217402245250154498`);
+        LCD.initGuild(guild);
         LCD.displayStats(guild);
     }
-
 };

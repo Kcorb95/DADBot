@@ -20,7 +20,8 @@
     "chalk": "^2.4.2",
     "discord.js": "github:discordjs/discord.js.git#master",
     "johnny-five": "^1.0.0",
-    "klasa": "github:dirigeants/klasa#master"
+    "klasa": "github:dirigeants/klasa#master",
+    "numeral": "^2.0.6"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

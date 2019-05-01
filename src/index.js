@@ -4,16 +4,17 @@ const BotClient = require('./lib/structures/BotClient');
 
 const arduino = require('johnny-five');
 const board = new arduino.Board();
-let lcd;
 const LCD = require('./lib/structures/LCD');
 
 board.on('ready', async () => {
-    lcd = new arduino.LCD({
+    let lcd = new arduino.LCD({
         pins: [7, 8, 9, 10, 11, 12], // What pins
         backlight: 6,
         rows: 2,
         cols: 16
     });
+
+    const button = new arduino.Button(13);
 
     LCD.initLCD(lcd);
     lcd = LCD.getLCD();
@@ -44,4 +45,8 @@ board.on('ready', async () => {
         commandMessageLifetime: 120,
         readyMessage: client => `Successfully initialized. Ready to serve ${client.guilds.size} guilds.`
     }).login(TOKEN);
+
+    button.on('press', () => {
+        LCD.fwdScreen();
+    });
 });
