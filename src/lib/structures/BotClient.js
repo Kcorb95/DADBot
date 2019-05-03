@@ -1,21 +1,23 @@
-const config = require('../../../settings');
+const config = require('../../../settings'); // Token etc. for bot
 
-const { Client } = require('klasa');
-const { MessageEmbed } = require('discord.js');
+const { Client } = require('klasa'); // Klasa (bot framework) client
+const { MessageEmbed } = require('discord.js'); // Easy access to message embeds without having to stick this in every single file we want to use one
 
-const defaultGuildSchema = require(`./schemas/defaultGuildSchema`);
+const defaultGuildSchema = require(`./schemas/defaultGuildSchema`); // "database" schema for storing our guild specific stuff. Normally would be done in postgres but bro
 
 class BotClient extends Client {
     constructor(options) {
         super({
-            ...options,
-            defaultGuildSchema
+            ...options, // extend default parameters
+            defaultGuildSchema // include our fancy shmancy schema
         });
 
-        this.config = config;
-        this.lcd = null;
-        this.methods = {};
-        this.methods.Embed = MessageEmbed;
+        // Client follows us around *most* places. This allows us to access things we would potentially use a lot without having to include them all over the place.
+        // Just a style preference, dunno if it makes a performance difference.
+        this.config = config; // attach our settings file to a property on client
+        this.lcd = null; // attach our lcd to a property on client
+        this.methods = {}; // potentially a bunch of these
+        this.methods.Embed = MessageEmbed; // attach our embed to a property on client
     }
 }
 
