@@ -5,6 +5,9 @@ let LED_OBJECT = null;
 let CURRENT_SCREEN = 1;
 let GUILD = null; // This feels dirty. Storing guild object so we don't have to pass it around
 
+let MESSAGE_COUNT = 22834774;
+let MESSAGE_COUNT_TODAY = 32282;
+
 module.exports = class LCD {
     static initLCD(lcd) { // Store our LCD object for use
         LCD_OBJECT = lcd;
@@ -24,6 +27,11 @@ module.exports = class LCD {
 
     static getLED() { // Return our Guild object (guild means discord server :) )
         return LED_OBJECT;
+    }
+
+    static newMessage() {
+        MESSAGE_COUNT++;
+        MESSAGE_COUNT_TODAY++;
     }
 
     static getCurrentScreen() { // Return index of current screen
@@ -66,11 +74,11 @@ module.exports = class LCD {
         LCD_OBJECT.setCursor(0, 0);
         // So discord, for reasons, does not allow you any way to get total message count in a guild that doesn't involve fetching 22 million messages just to increment a counter.
         // This means I set the initial value by hand based off a SIMPLE MESSAGE SEARCH THAT BOTS AREN'T ALLOWED TO DO and then let it do it's thing.
-        LCD_OBJECT.print(`Messages: ${numeral(GUILD.settings.messageCount)
+        LCD_OBJECT.print(`Messages: ${numeral(MESSAGE_COUNT)
             .format('0.00a')}`);// Format because we don't have space for daaaaaays
         LCD_OBJECT.setCursor(0, 1);
         // Again, have to set this by hand but at least it is updated on the message event. *Fairly* accurate based on my initial hand-recording.
-        LCD_OBJECT.print(`${`Today: ${numeral(GUILD.settings.messagesToday)
+        LCD_OBJECT.print(`${`Today: ${numeral(MESSAGE_COUNT_TODAY)
             .format('0,0')}`}`); // Format because we don't have space for daaaaaays
     }
 
@@ -80,5 +88,13 @@ module.exports = class LCD {
         LCD_OBJECT.print(`Anti-Social Soc.`);
         LCD_OBJECT.setCursor(0, 1);
         LCD_OBJECT.print(`invite.gg/ass`);
+    }
+
+    static doJoin() {
+        const currentScreen = CURRENT_SCREEN;
+        CURRENT_SCREEN = -1;
+        setTimeout(() => {
+            CURRENT_SCREEN = currentScreen;
+        }, 7000);
     }
 };
