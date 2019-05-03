@@ -66,14 +66,14 @@ module.exports = class LCD {
         LCD_OBJECT.setCursor(0, 0);
         // So discord, for reasons, does not allow you any way to get total message count in a guild that doesn't involve fetching 22 million messages just to increment a counter.
         // This means I set the initial value by hand based off a SIMPLE MESSAGE SEARCH THAT BOTS AREN'T ALLOWED TO DO and then let it do it's thing.
-        LCD_OBJECT.print(`Messages: ${numeral(GUILD.settings.messageCont)
+        LCD_OBJECT.print(`Messages: ${numeral(GUILD.settings.messageCount)
             .format('0.00a')}`);// Format because we don't have space for daaaaaays
         LCD_OBJECT.setCursor(0, 1);
         // Again, have to set this by hand but at least it is updated on the message event. *Fairly* accurate based on my initial hand-recording.
         LCD_OBJECT.print(`${`Today: ${numeral(GUILD.settings.messagesToday)
             .format('0,0')}`}`); // Format because we don't have space for daaaaaays
     }
-    
+
     static displayServer() { // Show member statistics in server
         LCD_OBJECT.clear();
         LCD_OBJECT.setCursor(0, 0);

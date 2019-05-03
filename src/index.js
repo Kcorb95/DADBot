@@ -22,9 +22,9 @@ board.on('ready', async () => { // When board is ready, init components and THEN
 
     lcd = LCD.getLCD(); // Alert that board init is complete on LCD
     lcd.clear();
-    lcd.cursor(0,0);
+    lcd.cursor(0, 0);
     lcd.print(`Anti-Social`);
-    lcd.cursor(0,1);
+    lcd.cursor(1, 0);
     lcd.print(`Society Online!`);
 
     new BotClient({ // CREATE OUR BOT CLIENT
