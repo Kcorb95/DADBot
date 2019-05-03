@@ -31,7 +31,7 @@ module.exports = class LCD {
     }
 
     static fwdScreen() { // Advance to next screen (or loop back)
-        if (CURRENT_SCREEN === 2) CURRENT_SCREEN = 1;
+        if (CURRENT_SCREEN === 3) CURRENT_SCREEN = 1;
         else CURRENT_SCREEN++;
         this.refreshScreen();
     }
@@ -44,6 +44,9 @@ module.exports = class LCD {
                 break;
             case 2:
                 this.displayMessages();
+                break;
+            case 3:
+                this.displayServer();
                 break;
         }
     }
@@ -69,5 +72,13 @@ module.exports = class LCD {
         // Again, have to set this by hand but at least it is updated on the message event. *Fairly* accurate based on my initial hand-recording.
         LCD_OBJECT.print(`${`Today: ${numeral(GUILD.settings.messagesToday)
             .format('0,0')}`}`); // Format because we don't have space for daaaaaays
+    }
+    
+    static displayServer() { // Show member statistics in server
+        LCD_OBJECT.clear();
+        LCD_OBJECT.setCursor(0, 0);
+        LCD_OBJECT.print(`Anti-Social Soc.`);
+        LCD_OBJECT.setCursor(0, 1);
+        LCD_OBJECT.print(`invite.gg/ass`);
     }
 };
