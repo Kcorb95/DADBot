@@ -7,7 +7,7 @@ module.exports = class extends Event {
         await LCD.newMessage(); // Increment our value
         led.on(); // turn that boi on because we want to be annoying
 
-        if (LCD.getCurrentScreen() === 2) {
+        if (LCD.getCurrentScreen() !== -1) {
             await setTimeout(() => {
                 led.off(); // turn that boi off because we want to be annoying
             }, 300);
