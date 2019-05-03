@@ -22,7 +22,10 @@ board.on('ready', async () => { // When board is ready, init components and THEN
 
     lcd = LCD.getLCD(); // Alert that board init is complete on LCD
     lcd.clear();
-    lcd.print(`Init. Complete!`);
+    lcd.cursor(0,0);
+    lcd.print(`Anti-Social`);
+    lcd.cursor(0,1);
+    lcd.print(`Society Online!`);
 
     new BotClient({ // CREATE OUR BOT CLIENT
         prefix: PREFIX, // Even though we don't have commands, still need a prefix
