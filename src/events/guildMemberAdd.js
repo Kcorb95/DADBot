@@ -14,7 +14,7 @@ module.exports = class extends Event {
         led.on(); // turn LED on to alert
 
         console.log(`New Member: ${member.user.username}`); // logging
-
+        LCD.doJoin();
         setTimeout(() => { // turn that guy off...
             LCD.refreshScreen(); // refresh screen can be used because we don't know the index (technically the class does though), so this puts us back at THAT screen
             led.off(); // Turn it back off
