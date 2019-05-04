@@ -3,11 +3,11 @@ const LCD = require('../lib/structures/LCD'); // Our LCD class
 
 module.exports = class extends Event {
     async run(message) {
-        const led = LCD.getLED(); // fetch led object
         await LCD.newMessage(); // Increment our value
-        led.on(); // turn that boi on because we want to be annoying
-
+        
         if (LCD.getCurrentScreen() !== -1) {
+            const led = LCD.getLED(); // fetch led object
+            led.on(); // turn that boi on because we want to be annoying
             await setTimeout(() => {
                 led.off(); // turn that boi off because we want to be annoying
             }, 300);
