@@ -3,6 +3,7 @@ const LCD = require('../lib/structures/LCD'); // LCD class
 
 module.exports = class extends Event {
     async run(member) { // This event runs on the event where a new user joins the guild (server). It by default passes a member and client object we can use
+        if (!this.client.ready) return null;
         const lcd = LCD.getLCD(); // Get our LCD object
         const led = LCD.getLED(); // Get our LED object
 
