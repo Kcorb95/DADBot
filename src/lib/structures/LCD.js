@@ -7,6 +7,7 @@ let GUILD = null; // This feels dirty. Storing guild object so we don't have to 
 
 let MESSAGE_COUNT = 22834774;
 let MESSAGE_COUNT_TODAY = 32282;
+let MEMBER_FLOW = 132;
 
 module.exports = class LCD {
     static initLCD(lcd) { // Store our LCD object for use
@@ -39,7 +40,7 @@ module.exports = class LCD {
     }
 
     static fwdScreen() { // Advance to next screen (or loop back)
-        if (CURRENT_SCREEN === 3) CURRENT_SCREEN = 1;
+        if (CURRENT_SCREEN === 4) CURRENT_SCREEN = 1;
         else CURRENT_SCREEN++;
         this.refreshScreen();
     }
@@ -54,6 +55,9 @@ module.exports = class LCD {
                 this.displayMessages();
                 break;
             case 3:
+                this.displayFlow();
+                break;
+            case 4:
                 this.displayServer();
                 break;
         }
@@ -90,9 +94,18 @@ module.exports = class LCD {
         LCD_OBJECT.print(`invite.gg/ass`);
     }
 
+    static displayFlow() {
+        LCD_OBJECT.clear();
+        LCD_OBJECT.setCursor(0, 0);
+        LCD_OBJECT.print(`Total Joins`);
+        LCD_OBJECT.setCursor(0, 1);
+        LCD_OBJECT.print(`Today: ${MEMBER_FLOW}`);
+    }
+
     static doJoin() {
         const currentScreen = CURRENT_SCREEN;
         CURRENT_SCREEN = -1;
+        MEMBER_FLOW++;
         setTimeout(() => {
             CURRENT_SCREEN = currentScreen;
         }, 7000);
